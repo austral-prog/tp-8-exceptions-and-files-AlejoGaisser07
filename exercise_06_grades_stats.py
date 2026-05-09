@@ -34,4 +34,22 @@ def grades_stats(filename):
             "Cami": (10.0, 10.0, 10.0),
         }
     """
-    pass  # Reemplazar con tu implementación
+    with open(filename, 'r') as file:
+        result = {} # asigno el diccionario
+        for line in file:
+            if line != "" and line != '\n': # chequeo que la linea no este vacia
+                where = line.find(':') # busco donde esta el :
+                grades = line[where+1:] # las notas estan despues del :
+                keys = line[:where] # las keyts estan antes del :
+                grades = grades[:-1].split(',') # hago que me separe las notas menos el \n del final
+                grades_converted = [] # nueva lista
+                for grade in grades:
+                    grade = float(grade) # convierto cada nota a float 
+                    grades_converted.append(grade) # la meto en la lista vacia
+                avg = (sum(grades_converted) / len(grades_converted)) # hago las cuentas
+                max_note = (max(grades_converted))
+                min_note = (min(grades_converted))
+                result[keys] = (avg, max_note, min_note) # lo meto en el diccionario
+                # vuelve arriba con la segunda linea y asi
+        return result
+    

@@ -28,4 +28,8 @@ def write_inventory(filename, inventory):
         # iron:7
         # wood:10
     """
-    pass  # Reemplazar con tu implementación
+    with open(filename, 'w') as file:
+        for item, quant in sorted(inventory.items()):
+            file.write(f"{item}:{int(quant)}\n")
+        return None
+        
